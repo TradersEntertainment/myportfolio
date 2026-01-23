@@ -19,7 +19,7 @@ export function Hero() {
                     Available for new projects
                 </div>
 
-                <h1 className="animate-fade-in-up [animation-delay:300ms] opacity-0 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
+                <h1 className="animate-fade-in-up [animation-delay:300ms] opacity-0 text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
                     Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Digital</span> <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Experiences</span>
                 </h1>
