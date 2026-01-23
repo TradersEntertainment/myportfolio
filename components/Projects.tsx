@@ -13,23 +13,7 @@ interface Project {
     github?: string;
 }
 
-const projects: Project[] = [
-    {
-        title: "Trader Battle",
-        description: "Gamified investment simulator where you compete against legendary traders like Warren Buffett in historical market scenarios. Features AI portraits and real-time PnL tracking.",
-        tags: ["Next.js", "Gamification", "Typescript", "Tailwind"],
-        image: "/assets/trader-battle.png",
-        link: "https://tradersdecision.vercel.app/",
-        github: "https://github.com/TradersEntertainment/tradersdecision",
-    },
-    {
-        title: "Bar Wars",
-        description: "Gaming and betting focused daily prediction market on Base Protocol. Battle with bars.",
-        tags: ["React", "Base Protocol", "Gaming", "Prediction Market"],
-        image: "/assets/bar-wars.png",
-        link: "https://candlewars.up.railway.app/",
-        github: undefined,
-    },
+const tradingProjects: Project[] = [
     {
         title: "PolymarketBar",
         description: "Real-time crypto betting aid dashboard. Features live odds, PnL tracking, and market visualization using FastAPI and React.",
@@ -54,6 +38,25 @@ const projects: Project[] = [
         link: "https://choosewalletstotrack.up.railway.app/",
         github: "https://github.com/TradersEntertainment/wallettrackerwebsiteTG",
     },
+];
+
+const otherProjects: Project[] = [
+    {
+        title: "Trader Battle",
+        description: "Gamified investment simulator where you compete against legendary traders like Warren Buffett in historical market scenarios. Features AI portraits and real-time PnL tracking.",
+        tags: ["Next.js", "Gamification", "Typescript", "Tailwind"],
+        image: "/assets/trader-battle.png",
+        link: "https://tradersdecision.vercel.app/",
+        github: "https://github.com/TradersEntertainment/tradersdecision",
+    },
+    {
+        title: "Bar Wars",
+        description: "Gaming and betting focused daily prediction market on Base Protocol. Battle with bars.",
+        tags: ["React", "Base Protocol", "Gaming", "Prediction Market"],
+        image: "/assets/bar-wars.png",
+        link: "https://candlewars.up.railway.app/",
+        github: undefined,
+    },
     {
         title: "CozyTally",
         description: "A cute and aesthetic daily habit tracker and counter. Features interactive tally marks and a cozy atmosphere.",
@@ -64,60 +67,84 @@ const projects: Project[] = [
     },
 ];
 
+function ProjectCard({ project, index, delayOffset = 0 }: { project: Project; index: number; delayOffset?: number }) {
+    return (
+        <div
+            className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards] group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors"
+            style={{ animationDelay: `${(index + delayOffset) * 100}ms` }}
+        >
+            <div className="aspect-video relative overflow-hidden">
+                <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 transition-opacity opacity-100 md:opacity-0 md:group-hover:opacity-100">
+                    {project.github && (
+                        <Link href={project.github} className="p-2 bg-white rounded-full text-black hover:bg-neutral-200 transition-colors">
+                            <Github size={20} />
+                        </Link>
+                    )}
+                    {project.link && (
+                        <Link href={project.link} className="p-2 bg-white rounded-full text-black hover:bg-neutral-200 transition-colors">
+                            <ExternalLink size={20} />
+                        </Link>
+                    )}
+                </div>
+            </div>
+            <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <p className="text-neutral-400 text-sm mb-4 line-clamp-3">
+                    {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                        <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export function Projects() {
     return (
         <section id="projects" className="py-24 bg-black/50 relative">
             <div className="container px-4 md:px-6">
-                <div className="mb-12 text-center animate-fade-in-up">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-                    <p className="text-neutral-400 max-w-2xl mx-auto">
-                        A selection of my recent work in fintech, automation, and full-stack development.
-                    </p>
+
+                {/* Section 1: Trading Products */}
+                <div className="mb-16">
+                    <div className="mb-12 text-center animate-fade-in-up">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4 text-red-500">Trading Products</h2>
+                        <p className="text-neutral-400 max-w-2xl mx-auto">
+                            Professional tools and analytics dashboards for crypto markets.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {tradingProjects.map((project, index) => (
+                            <ProjectCard key={index} project={project} index={index} />
+                        ))}
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <div
-                            key={index}
-                            className="animate-fade-in-up opacity-0 [animation-fill-mode:forwards] group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors"
-                            style={{ animationDelay: `${index * 100}ms` }}
-                        >
-                            <div className="aspect-video relative overflow-hidden">
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 transition-opacity opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    {project.github && (
-                                        <Link href={project.github} className="p-2 bg-white rounded-full text-black hover:bg-neutral-200 transition-colors">
-                                            <Github size={20} />
-                                        </Link>
-                                    )}
-                                    {project.link && (
-                                        <Link href={project.link} className="p-2 bg-white rounded-full text-black hover:bg-neutral-200 transition-colors">
-                                            <ExternalLink size={20} />
-                                        </Link>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                                <p className="text-neutral-400 text-sm mb-4 line-clamp-3">
-                                    {project.description}
-                                </p>
-                                <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag) => (
-                                        <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-300">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                {/* Section 2: Other Projects */}
+                <div>
+                    <div className="mb-12 text-center animate-fade-in-up">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4">Games & Apps</h2>
+                        <p className="text-neutral-400 max-w-2xl mx-auto">
+                            Interactive experiences, gamified finance, and utilities.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {otherProjects.map((project, index) => (
+                            <ProjectCard key={index} project={project} index={index} delayOffset={3} />
+                        ))}
+                    </div>
                 </div>
+
             </div>
         </section>
     );
