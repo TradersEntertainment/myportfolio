@@ -15,14 +15,6 @@ interface Project {
 
 const projects: Project[] = [
     {
-        title: "CozyTally",
-        description: "A cute and aesthetic daily habit tracker and counter. Features interactive tally marks and a cozy atmosphere.",
-        tags: ["React", "CSS", "Frontend", "Utility"],
-        image: "/assets/cozy-tally.png",
-        link: "https://cozytally.vercel.app/",
-        github: "https://github.com/TradersEntertainment/cozytally",
-    },
-    {
         title: "Bar Wars",
         description: "Gaming and betting focused daily prediction market on Base Protocol. Battle with bars.",
         tags: ["React", "Base Protocol", "Gaming", "Prediction Market"],
@@ -53,6 +45,14 @@ const projects: Project[] = [
         image: "/assets/hyperliquid-bot.png",
         link: "https://choosewalletstotrack.up.railway.app/",
         github: "https://github.com/TradersEntertainment/wallettrackerwebsiteTG",
+    },
+    {
+        title: "CozyTally",
+        description: "A cute and aesthetic daily habit tracker and counter. Features interactive tally marks and a cozy atmosphere.",
+        tags: ["React", "CSS", "Frontend", "Utility"],
+        image: "/assets/cozy-tally.png",
+        link: "https://cozytally.vercel.app/",
+        github: "https://github.com/TradersEntertainment/cozytally",
     },
 ];
 
