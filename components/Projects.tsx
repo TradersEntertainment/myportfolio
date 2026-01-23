@@ -51,8 +51,8 @@ const otherProjects: Project[] = [
     },
     {
         title: "Bar Wars",
-        description: "Gaming and betting focused daily prediction market on Base Protocol. Battle with bars.",
-        tags: ["React", "Base Protocol", "Gaming", "Prediction Market"],
+        description: "A Web3 blockchain application built on Base Protocol. High-stakes daily prediction market battles.",
+        tags: ["Web3", "Blockchain", "Base Protocol", "Gaming", "React"],
         image: "/assets/bar-wars.png",
         link: "https://candlewars.up.railway.app/",
         github: undefined,
@@ -115,8 +115,23 @@ export function Projects() {
         <section id="projects" className="py-24 bg-black/50 relative">
             <div className="container px-4 md:px-6">
 
-                {/* Section 1: Trading Products */}
+                {/* Section 1: Games & Apps */}
                 <div className="mb-16">
+                    <div className="mb-12 text-center animate-fade-in-up">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4">Games & Apps</h2>
+                        <p className="text-neutral-400 max-w-2xl mx-auto">
+                            Interactive experiences, Web3 applications, and utilities.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {otherProjects.map((project, index) => (
+                            <ProjectCard key={index} project={project} index={index} />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Section 2: Trading Products */}
+                <div>
                     <div className="mb-12 text-center animate-fade-in-up">
                         <h2 className="text-3xl md:text-5xl font-bold mb-4 text-red-500">Trading Products</h2>
                         <p className="text-neutral-400 max-w-2xl mx-auto">
@@ -125,21 +140,6 @@ export function Projects() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {tradingProjects.map((project, index) => (
-                            <ProjectCard key={index} project={project} index={index} />
-                        ))}
-                    </div>
-                </div>
-
-                {/* Section 2: Other Projects */}
-                <div>
-                    <div className="mb-12 text-center animate-fade-in-up">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-4">Games & Apps</h2>
-                        <p className="text-neutral-400 max-w-2xl mx-auto">
-                            Interactive experiences, gamified finance, and utilities.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {otherProjects.map((project, index) => (
                             <ProjectCard key={index} project={project} index={index} delayOffset={3} />
                         ))}
                     </div>
