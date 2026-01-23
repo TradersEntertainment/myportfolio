@@ -19,7 +19,7 @@ const projects: Project[] = [
         description: "Gamified investment simulator where you compete against legendary traders like Warren Buffett in historical market scenarios. Features AI portraits and real-time PnL tracking.",
         tags: ["Next.js", "Gamification", "Typescript", "Tailwind"],
         image: "/assets/trader-battle.png",
-        link: "https://github.com/TradersEntertainment/tradersdecision",
+        link: "https://tradersdecision.vercel.app/",
         github: "https://github.com/TradersEntertainment/tradersdecision",
     },
     {
