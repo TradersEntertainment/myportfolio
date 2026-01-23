@@ -89,7 +89,7 @@ export function Projects() {
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 transition-opacity opacity-100 md:opacity-0 md:group-hover:opacity-100">
                                     {project.github && (
                                         <Link href={project.github} className="p-2 bg-white rounded-full text-black hover:bg-neutral-200 transition-colors">
                                             <Github size={20} />
