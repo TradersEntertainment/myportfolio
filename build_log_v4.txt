@@ -1,0 +1,30 @@
+
+> portfolio-site@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\omery\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\omery\.gemini\antigravity\scratch\portfolio-site\package-lock.json
+
+▲ Next.js 16.1.4 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.2s
+  Running TypeScript ...
+Failed to compile.
+
+./components/Hero.tsx:22:21
+Type error: Type '{ children: (string | Element)[]; initial: { opacity: number; y: number; }; animate: { opacity: number; y: number; }; transition: { duration: number; delay: number; }; className: string; }' is not assignable to type 'IntrinsicAttributes & HTMLAttributesWithoutMotionProps<unknown, unknown> & MotionProps & RefAttributes<unknown>'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & HTMLAttributesWithoutMotionProps<unknown, unknown> & MotionProps & RefAttributes<unknown>'.
+
+[0m [90m 20 |[39m                     animate[33m=[39m{{ opacity[33m:[39m [35m1[39m[33m,[39m y[33m:[39m [35m0[39m }}
+ [90m 21 |[39m                     transition[33m=[39m{{ duration[33m:[39m [35m0.5[39m[33m,[39m delay[33m:[39m [35m0.2[39m }}
+[31m[1m>[22m[39m[90m 22 |[39m                     className[33m=[39m[32m"inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-neutral-300 mb-8 backdrop-blur-sm"[39m
+ [90m    |[39m                     [31m[1m^[22m[39m
+ [90m 23 |[39m                 [33m>[39m
+ [90m 24 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"[39m [33m/[39m[33m>[39m
+ [90m 25 |[39m                     [33mAvailable[39m [36mfor[39m [36mnew[39m projects[0m
+Next.js build worker exited with code: 1 and signal: null
