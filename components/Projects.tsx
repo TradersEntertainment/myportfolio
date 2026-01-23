@@ -15,6 +15,14 @@ interface Project {
 
 const projects: Project[] = [
     {
+        title: "Trader Battle",
+        description: "Gamified investment simulator where you compete against legendary traders like Warren Buffett in historical market scenarios. Features AI portraits and real-time PnL tracking.",
+        tags: ["Next.js", "Gamification", "Typescript", "Tailwind"],
+        image: "/assets/trader-battle.png",
+        link: "https://github.com/TradersEntertainment/tradersdecision",
+        github: "https://github.com/TradersEntertainment/tradersdecision",
+    },
+    {
         title: "Bar Wars",
         description: "Gaming and betting focused daily prediction market on Base Protocol. Battle with bars.",
         tags: ["React", "Base Protocol", "Gaming", "Prediction Market"],
