@@ -43,7 +43,7 @@ const tradingProjects: Project[] = [
         description: "AI-powered quantitative trading platform. Design, backtest, and deploy trading strategies using natural language with Google Gemini AI integration.",
         tags: ["React", "TypeScript", "AI", "Gemini API", "Hyperliquid"],
         image: "/assets/strategyfactory.png",
-        link: "https://strategyfactory.vercel.app/",
+        link: "https://strategyfactory-last.vercel.app/",
         github: "https://github.com/TradersEntertainment/strategyfactoryLast",
     },
 ];
