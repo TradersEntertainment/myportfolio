@@ -38,6 +38,22 @@ const tradingProjects: Project[] = [
         link: "https://choosewalletstotrack.up.railway.app/",
         github: "https://github.com/TradersEntertainment/wallettrackerwebsiteTG",
     },
+    {
+        title: "StrategyFactory AI",
+        description: "AI-powered quantitative trading platform. Design, backtest, and deploy trading strategies using natural language with Google Gemini AI integration.",
+        tags: ["React", "TypeScript", "AI", "Gemini API", "Hyperliquid"],
+        image: "/assets/strategyfactory.png",
+        link: undefined,
+        github: "https://github.com/TradersEntertainment/strategyfactoryLast",
+    },
+    {
+        title: "QuantLAB",
+        description: "Interactive quantitative finance interview preparation platform. Gamified learning experience with XP tracking, streak counters, and visual logic explanations.",
+        tags: ["JavaScript", "Education", "Gamification", "Finance"],
+        image: "/assets/quantlab.png",
+        link: undefined,
+        github: "https://github.com/TradersEntertainment/quanttraining",
+    },
 ];
 
 const otherProjects: Project[] = [
