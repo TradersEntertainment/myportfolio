@@ -3,7 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Tracker } from "@/components/Tracker";
-import { Dragon3D } from "@/components/Dragon3D";
+import { MatrixIntro } from "@/components/MatrixIntro";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -21,8 +21,8 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body className={outfit.className}>
         <Navbar />
+        <MatrixIntro />
         <Tracker />
-        <Dragon3D />
         {children}
       </body>
     </html>
