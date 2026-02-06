@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import { Tracker } from "@/components/Tracker";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body className={outfit.className}>
         <Navbar />
+        <Tracker />
         {children}
       </body>
     </html>
