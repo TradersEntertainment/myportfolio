@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
-import { MatrixDragon } from "@/components/MatrixDragon";
 import { Tracker } from "@/components/Tracker";
+import { Dragon3D } from "@/components/Dragon3D";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={outfit.className}>
         <Navbar />
         <Tracker />
-        <MatrixDragon />
+        <Dragon3D />
         {children}
       </body>
     </html>
