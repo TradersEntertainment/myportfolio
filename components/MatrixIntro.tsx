@@ -6,7 +6,6 @@ export function MatrixIntro() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [show, setShow] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [initText, setInitText] = useState("");
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -24,43 +23,9 @@ export function MatrixIntro() {
         const drops: number[] = [];
         for (let i = 0; i < columns; i++) drops[i] = 1;
 
-        // --- CHAOS ENGINE SETUP ---
-        const chaosEmojis = [
-            '👾', '🏃', '🏎️', '✈️', '👻', '🍄', '🐢', '🕹️', '🎲', '🏰', '🗡️', // Gaming
-            '🚀', '📉', '📈', '💰', '🐂', '🐻', '💎', '🏦', '💸', '📊', // Trading
-            '🔥', '💥', '⚡', '🌪️', '🌀', '⚠️', '☢️', '💣', '🩸', '💊'  // Pure Chaos
-        ];
-
-        interface Particle {
-            x: number;
-            y: number;
-            emoji: string;
-            speedX: number;
-            speedY: number;
-            rotation: number;
-            rotationSpeed: number;
-            size: number;
-        }
-
-        const particles: Particle[] = [];
-        const MAX_PARTICLES = 80; // "Daha da kaos"
-
-        for (let i = 0; i < MAX_PARTICLES; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                emoji: chaosEmojis[Math.floor(Math.random() * chaosEmojis.length)],
-                speedX: (Math.random() - 0.5) * 20, // High Speed
-                speedY: (Math.random() - 0.5) * 20,
-                rotation: Math.random() * 360,
-                rotationSpeed: (Math.random() - 0.5) * 0.8,
-                size: 20 + Math.random() * 50
-            });
-        }
-
         const draw = () => {
-            // 1. Matix Rain Background (fades previous frame)
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Slightly faster fade for chaos clarity
+            // Fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, width, height);
 
             // Draw Matrix Rain
@@ -72,53 +37,21 @@ export function MatrixIntro() {
                 if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
-
-            // 2. Render Chaos Particles
-            for (let p of particles) {
-                // Update
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.rotation += p.rotationSpeed;
-
-                // Screen Wrap (Teleporting enemies)
-                if (p.x < -100) p.x = width + 100;
-                if (p.x > width + 100) p.x = -100;
-                if (p.y < -100) p.y = height + 100;
-                if (p.y > height + 100) p.y = -100;
-
-                // Random Glitch Jitter
-                if (Math.random() > 0.92) {
-                    p.x += (Math.random() - 0.5) * 100;
-                    p.y += (Math.random() - 0.5) * 100;
-                }
-
-                // Render
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.rotation);
-                ctx.font = `${p.size}px serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(p.emoji, 0, 0);
-                ctx.restore();
-            }
         };
 
         const interval = setInterval(draw, 33);
 
-        // Resize handler
         const handleResize = () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', handleResize);
 
-        // Timeline
-        setTimeout(() => setInitText("SYSTEM BREACH DETECTED"), 500);
-        setTimeout(() => setInitText("CHAOS PROTOCOL: ENGAGED"), 1800);
-
-        setTimeout(() => { setFadeOut(true); }, 3500); // Longer intro for chaos
-        setTimeout(() => { setShow(false); }, 4500);
+        // Fade out logic is now controlled by the BattleScene ideally, 
+        // but for standalone safety we keep a long timer or listen to an event.
+        // For now, let's make it persist longer so the 3D battle can play out (approx 5-6s)
+        setTimeout(() => { setFadeOut(true); }, 5500);
+        setTimeout(() => { setShow(false); }, 6500);
 
         return () => {
             clearInterval(interval);
@@ -130,14 +63,9 @@ export function MatrixIntro() {
 
     return (
         <div
-            className={`fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-1000 ease-in-out ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className={`fixed inset-0 z-[40] bg-black flex items-center justify-center transition-opacity duration-1000 ease-in-out pointer-events-none ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
         >
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-
-            {/* Glitchy Text Overlay */}
-            <h1 className="relative z-10 font-mono text-3xl md:text-6xl text-red-500 font-bold tracking-widest animate-pulse text-center p-4 bg-black/50 border-2 border-red-500 rounded">
-                {initText}
-            </h1>
         </div>
     );
 }

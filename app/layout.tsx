@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Tracker } from "@/components/Tracker";
 import { MatrixIntro } from "@/components/MatrixIntro";
+import { BattleScene } from "@/components/BattleScene";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={outfit.className}>
         <Navbar />
         <MatrixIntro />
+        <BattleScene />
         <Tracker />
         {children}
       </body>
