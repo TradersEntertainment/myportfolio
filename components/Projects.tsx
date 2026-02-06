@@ -129,11 +129,11 @@ function ProjectCard({ project, index, delayOffset = 0 }: { project: Project; in
 export function Projects() {
     return (
         <section id="projects" className="py-24 bg-black/50 relative">
-            <div className="container px-4 md:px-6">
+            <div className="w-full max-w-[1920px] mx-auto px-4 md:px-8">
 
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12">
+                <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto_1fr] gap-8 xl:gap-0 relative">
                     {/* Section 1: Games & Apps */}
-                    <div>
+                    <div className="xl:pr-12">
                         <div className="mb-8 text-center xl:text-left animate-fade-in-up">
                             <h2 className="text-3xl font-bold mb-4">Games & Apps</h2>
                             <p className="text-neutral-400">
@@ -147,8 +147,13 @@ export function Projects() {
                         </div>
                     </div>
 
+                    {/* Matrix Divider (Desktop Only) */}
+                    <div className="hidden xl:flex justify-center relative h-full">
+                        <div className="h-full w-[1px] bg-gradient-to-b from-transparent via-green-500/50 to-transparent shadow-[0_0_10px_#22c55e] animate-pulse"></div>
+                    </div>
+
                     {/* Section 2: Trading Products */}
-                    <div>
+                    <div className="xl:pl-12">
                         <div className="mb-8 text-center xl:text-left animate-fade-in-up">
                             <h2 className="text-3xl font-bold mb-4 text-red-500">Trading Products</h2>
                             <p className="text-neutral-400">
