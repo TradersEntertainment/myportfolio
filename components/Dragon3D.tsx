@@ -11,7 +11,13 @@ function DragonModel({ isLanded, onClick }: { isLanded: boolean, onClick: () => 
     // but here we just try-catch or assume user will provide file. 
     // For now, let's render a group that WOULD contain the model)
 
+    // Load the dragon model
+    const { scene } = useGLTF('/dragon.glb');
     const group = useRef<THREE.Group>(null);
+
+    // Clone scene so we can re-use it if needed, though here nice to just have one
+    const dragonScene = scene.clone();
+
     // Default position: Top Left (off screen mostly)
     const [position, setPosition] = useState(new THREE.Vector3(-10, 5, 0));
 
@@ -37,16 +43,13 @@ function DragonModel({ isLanded, onClick }: { isLanded: boolean, onClick: () => 
 
     return (
         <group ref={group} onClick={onClick} position={[-10, 5, 0]}>
-            {/* 
-            PLACEHOLDER: This Box represents the dragon. 
-            Once you have 'public/dragon.glb', uncomment the useGLTF lines below and remove this mesh.
-         */}
-            <mesh castShadow receiveShadow>
-                <coneGeometry args={[1, 3, 4]} />
-                <meshStandardMaterial color="#ff0000" metalness={0.6} roughness={0.2} />
-            </mesh>
+            <primitive
+                object={dragonScene}
+                scale={50} // Stanford dragon is usually tiny, scale up.
+                rotation={[0, -Math.PI / 2, 0]} // Orient to face right
+            />
 
-            {/* Eye glow */}
+            {/* Eye glow - positioned relative to assumed head location */}
             <pointLight position={[0, 1, 0.5]} color="orange" intensity={2} distance={3} />
         </group>
     );
