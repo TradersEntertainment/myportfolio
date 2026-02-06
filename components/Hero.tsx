@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -34,19 +33,25 @@ export function Hero() {
                 </p>
 
                 <div className="animate-fade-in-up [animation-delay:500ms] opacity-0 flex flex-col sm:flex-row gap-4">
-                    <Link
-                        href="#projects"
-                        className="inline-flex h-12 items-center justify-center rounded-md bg-white text-black px-8 text-sm font-medium shadow-lg hover:bg-neutral-200 transition-colors"
+                    <button
+                        onClick={() => {
+                            const element = document.getElementById('projects');
+                            element?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="inline-flex h-12 items-center justify-center rounded-md bg-white text-black px-8 text-sm font-medium shadow-lg hover:bg-neutral-200 transition-colors cursor-pointer"
                     >
                         Start Game
-                    </Link>
-                    <Link
-                        href="#contact"
-                        className="inline-flex h-12 items-center justify-center rounded-md border border-white/10 bg-white/5 px-8 text-sm font-medium text-white shadow-sm hover:bg-white/10 transition-colors backdrop-blur-sm group"
+                    </button>
+                    <button
+                        onClick={() => {
+                            const element = document.getElementById('contact');
+                            element?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="inline-flex h-12 items-center justify-center rounded-md border border-white/10 bg-white/5 px-8 text-sm font-medium text-white shadow-sm hover:bg-white/10 transition-colors backdrop-blur-sm group cursor-pointer"
                     >
                         Contact Player 1
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    </button>
                 </div>
             </div>
 
