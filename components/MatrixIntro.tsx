@@ -9,12 +9,6 @@ export function MatrixIntro() {
     const [initText, setInitText] = useState("");
 
     useEffect(() => {
-        // Check if we should show the intro (optional: only show once per session)
-        // const hasSeenIntro = sessionStorage.getItem('hasSeenIntro');
-        // if (hasSeenIntro) { setShow(false); return; }
-        // sessionStorage.setItem('hasSeenIntro', 'true');
-
-        // Canvas Matrix Rain Logic
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
@@ -23,31 +17,90 @@ export function MatrixIntro() {
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
+        // --- MATRIX RAIN SETUP ---
         const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*';
         const fontSize = 16;
         const columns = width / fontSize;
         const drops: number[] = [];
+        for (let i = 0; i < columns; i++) drops[i] = 1;
 
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
+        // --- CHAOS ENGINE SETUP ---
+        const chaosEmojis = [
+            '👾', '🏃', '🏎️', '✈️', '👻', '🍄', '🐢', '🕹️', '🎲', '🏰', '🗡️', // Gaming
+            '🚀', '📉', '📈', '💰', '🐂', '🐻', '💎', '🏦', '💸', '📊', // Trading
+            '🔥', '💥', '⚡', '🌪️', '🌀', '⚠️', '☢️', '💣', '🩸', '💊'  // Pure Chaos
+        ];
+
+        interface Particle {
+            x: number;
+            y: number;
+            emoji: string;
+            speedX: number;
+            speedY: number;
+            rotation: number;
+            rotationSpeed: number;
+            size: number;
+        }
+
+        const particles: Particle[] = [];
+        const MAX_PARTICLES = 80; // "Daha da kaos"
+
+        for (let i = 0; i < MAX_PARTICLES; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                emoji: chaosEmojis[Math.floor(Math.random() * chaosEmojis.length)],
+                speedX: (Math.random() - 0.5) * 20, // High Speed
+                speedY: (Math.random() - 0.5) * 20,
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 0.8,
+                size: 20 + Math.random() * 50
+            });
         }
 
         const draw = () => {
-            // Semi-transparent black for trail effect
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            // 1. Matix Rain Background (fades previous frame)
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Slightly faster fade for chaos clarity
             ctx.fillRect(0, 0, width, height);
 
+            // Draw Matrix Rain
             ctx.fillStyle = '#0F0';
             ctx.font = `${fontSize}px monospace`;
-
             for (let i = 0; i < drops.length; i++) {
                 const text = characters.charAt(Math.floor(Math.random() * characters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
+            }
+
+            // 2. Render Chaos Particles
+            for (let p of particles) {
+                // Update
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.rotation += p.rotationSpeed;
+
+                // Screen Wrap (Teleporting enemies)
+                if (p.x < -100) p.x = width + 100;
+                if (p.x > width + 100) p.x = -100;
+                if (p.y < -100) p.y = height + 100;
+                if (p.y > height + 100) p.y = -100;
+
+                // Random Glitch Jitter
+                if (Math.random() > 0.92) {
+                    p.x += (Math.random() - 0.5) * 100;
+                    p.y += (Math.random() - 0.5) * 100;
+                }
+
+                // Render
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation);
+                ctx.font = `${p.size}px serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(p.emoji, 0, 0);
+                ctx.restore();
             }
         };
 
@@ -60,23 +113,12 @@ export function MatrixIntro() {
         }
         window.addEventListener('resize', handleResize);
 
-        // Timeline for Intro
-        // 1. Start: Rain
-        // 2. 0.5s: "SYSTEM INITIALIZED" text
-        setTimeout(() => setInitText("SYSTEM INITIALIZED"), 500);
+        // Timeline
+        setTimeout(() => setInitText("SYSTEM BREACH DETECTED"), 500);
+        setTimeout(() => setInitText("CHAOS PROTOCOL: ENGAGED"), 1800);
 
-        // 3. 1.5s: "ACCESS GRANTED" loop or similar
-        setTimeout(() => setInitText("ACCESS GRANTED"), 1800);
-
-        // 4. 2.5s: Fade out
-        setTimeout(() => {
-            setFadeOut(true);
-        }, 2500);
-
-        // 5. 3.5s: Remove from DOM
-        setTimeout(() => {
-            setShow(false);
-        }, 3500);
+        setTimeout(() => { setFadeOut(true); }, 3500); // Longer intro for chaos
+        setTimeout(() => { setShow(false); }, 4500);
 
         return () => {
             clearInterval(interval);
@@ -93,13 +135,9 @@ export function MatrixIntro() {
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
             {/* Glitchy Text Overlay */}
-            <h1 className="relative z-10 font-mono text-4xl md:text-6xl text-green-500 font-bold tracking-widest animate-pulse">
+            <h1 className="relative z-10 font-mono text-3xl md:text-6xl text-red-500 font-bold tracking-widest animate-pulse text-center p-4 bg-black/50 border-2 border-red-500 rounded">
                 {initText}
             </h1>
-
-            <style jsx>{`
-        /* Optional custom glitch animations could go here */
-      `}</style>
         </div>
     );
 }
