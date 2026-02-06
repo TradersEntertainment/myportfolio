@@ -16,26 +16,49 @@ export function MatrixIntro() {
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
-        // --- MATRIX RAIN SETUP ---
         const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*';
         const fontSize = 16;
         const columns = width / fontSize;
         const drops: number[] = [];
-        for (let i = 0; i < columns; i++) drops[i] = 1;
+
+        // Initialize drops at random y positions for immediate screen coverage or 0 for top-down
+        // Top-down looks better for an "incoming" effect
+        for (let i = 0; i < columns; i++) drops[i] = Math.random() * -20; // Start slightly above
 
         const draw = () => {
-            // Fade effect
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, width, height);
+            // Clear canvas completely to maintain transparency
+            ctx.clearRect(0, 0, width, height);
 
-            // Draw Matrix Rain
-            ctx.fillStyle = '#0F0';
-            ctx.font = `${fontSize}px monospace`;
+            ctx.font = `${fontSize}px monospace`; // Consolas, Monaco, etc
+
             for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                // Draw the main character and a simulated trail
+                // Since we clearRect, we must draw the "tail" manually
+
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Draw Tip (Brightest)
+                ctx.fillStyle = '#ccffcc';
+                const textObj = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(textObj, x, y);
+
+                // Draw Trail (Fading)
+                const trailLength = 10;
+                for (let k = 1; k < trailLength; k++) {
+                    ctx.fillStyle = `rgba(0, 255, 0, ${1 - k / trailLength})`;
+                    // We can use the same char or random, random looks more 'active'
+                    const trailChar = characters.charAt(Math.floor(Math.random() * characters.length));
+                    ctx.fillText(trailChar, x, y - k * fontSize);
+                }
+
+                // Move drop
                 drops[i]++;
+
+                // Reset
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
             }
         };
 
@@ -47,11 +70,9 @@ export function MatrixIntro() {
         }
         window.addEventListener('resize', handleResize);
 
-        // Fade out logic is now controlled by the BattleScene ideally, 
-        // but for standalone safety we keep a long timer or listen to an event.
-        // For now, let's make it persist longer so the 3D battle can play out (approx 5-6s)
-        setTimeout(() => { setFadeOut(true); }, 5500);
-        setTimeout(() => { setShow(false); }, 6500);
+        // Timing requested: "sadece ilk girişte 2 saniye"
+        setTimeout(() => { setFadeOut(true); }, 2000);
+        setTimeout(() => { setShow(false); }, 3000);
 
         return () => {
             clearInterval(interval);
@@ -63,7 +84,9 @@ export function MatrixIntro() {
 
     return (
         <div
-            className={`fixed inset-0 z-[40] bg-black flex items-center justify-center transition-opacity duration-1000 ease-in-out pointer-events-none ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+            // Removed bg-black. pointer-events-none ensures clicks go through to the site.
+            // z-50 to stay on top
+            className={`fixed inset-0 z-50 pointer-events-none transition-opacity duration-1000 ease-out ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
         >
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         </div>
