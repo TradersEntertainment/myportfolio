@@ -81,66 +81,14 @@ const tradingProjects: Project[] = [
         link: "https://choosewalletstotrack.up.railway.app/",
         github: "https://github.com/TradersEntertainment/wallettrackerwebsiteTG",
     },
-    {
-        title: "PolyRelayTracker",
-        description: "Follows Polymarket whale withdrawals across chains. Resolves a profile link, handle or tx hash into a four-stop visual trace: Polygon proxy wallet, Relay Protocol bridge deposit, destination chain wallet, and finally the exchange it lands on.",
-        tags: ["React", "Web3", "Polygon", "Cross-chain", "Vite"],
-        github: "https://github.com/TradersEntertainment/polyrelaytracker",
-    },
-    {
-        title: "PolymarketBar",
-        description: "Reads Polymarket candle structure to time bets on the book. Live odds, probability curves, orderbook panel, execution path and streak statistics, fed by a FastAPI backend with pluggable CCXT and Hyperliquid data adapters.",
-        tags: ["React", "FastAPI", "Python", "WebSockets", "Polymarket"],
-        image: "/assets/polymarket-bar.png",
-        link: "https://polymarketbar-production.up.railway.app/",
-        github: "https://github.com/TradersEntertainment/polymarketbar",
-    },
-    {
-        title: "PolyBetPriceTracker",
-        description: "Orderbook microstructure alerts for Polymarket. Paste any market link and it resolves title, price and token IDs through the Gamma API, renders the live CLOB book as depth bars, then alerts on sudden large walls near the spread and on depth surges, routed per alert to different Telegram chats.",
-        tags: ["Node.js", "Polymarket", "Orderbook", "Telegram", "SQLite"],
-        github: "https://github.com/TradersEntertainment/polybetpricetracker",
-    },
-    {
-        title: "5mFinder",
-        description: "Polymarket event analyzer and position tracker that reads Polygon logs directly over web3 across a pool of fallback RPCs, scanning whale positions in the background with a blacklist workflow for addresses you want ignored.",
-        tags: ["Python", "web3.py", "Polygon", "Flask", "Polymarket"],
-        github: "https://github.com/TradersEntertainment/5mfinder",
-    },
-    {
-        title: "S&P 500 Resolution Hub",
-        description: "Settlement-grade reference for S&P 500 Polymarket markets. Pulls live SPY prices from Pyth Hermes and the exact 16:00 New York prior close from Pyth Benchmarks, handling weekends and pre-close hours so the resolution number is never ambiguous.",
-        tags: ["Python", "Pyth Network", "Flask", "Equities"],
-        github: "https://github.com/TradersEntertainment/sp500wsj",
-    },
-    {
-        title: "Preferred & CEF Scanner",
-        description: "Scans preferred-share and closed-end-fund master lists on a 15-minute loop for discount and yield thresholds, with a web dashboard and Telegram push on the names that clear the filter.",
-        tags: ["Python", "Flask", "Screening", "Fixed Income"],
-        github: "https://github.com/TradersEntertainment/preffilter",
-    },
 ];
 
 const otherProjects: Project[] = [
-    {
-        title: "Kadastro",
-        description: "You draw roads on a map with your finger and the city grows around them. A state-built national highway crosses the map that you can neither place nor demolish - the whole game is what your city extracts from it. Deterministic seeded simulation with zero asset files: every texture, building facades included, is generated in code at startup.",
-        tags: ["TypeScript", "three.js", "Simulation", "WebGL", "PWA"],
-        github: "https://github.com/TradersEntertainment/citybuild",
-    },
     {
         title: "flight",
         description: "Open-world browser game on the real map. Fly a plane, drive a car or sail a boat over genuine elevation data and satellite imagery, teleport anywhere, switch to night, race through gates. Terrain streams as a Web Mercator quadtree with skirt geometry at LOD seams; buildings and roads come from OpenStreetMap.",
         tags: ["TypeScript", "three.js", "Geospatial", "OSM", "Game Dev"],
         github: "https://github.com/TradersEntertainment/flight",
-    },
-    {
-        title: "Candle Bar Wars",
-        description: "Parimutuel prediction market on Base where you bet on candle momentum instead of price: will a 24-hour window hold more green or red 1-minute candles? Pool-based rather than orderbook, so every bet is instantly matched and the underdog wins big. ERC-721 ticket NFTs, bot-driven settlement at 00:00 UTC.",
-        tags: ["Solidity", "Base", "Next.js", "Wagmi", "Prediction Markets"],
-        image: "/assets/bar-wars.png",
-        link: "https://candlewars.up.railway.app",
-        github: "https://github.com/TradersEntertainment/CandleBarWars",
     },
     {
         title: "ReadEasy",
@@ -168,18 +116,6 @@ const otherProjects: Project[] = [
         github: "https://github.com/TradersEntertainment/diyetisyenapp",
     },
     {
-        title: "Minesweeper Battle",
-        description: "Multiplayer on-chain minesweeper on Base. 2-10 players take turns avoiding mines for an ETH pot, with grid size and mine count scaling to the player count and difficulty rising 20% each round. Game logic lives entirely in the contract; the UI updates from events.",
-        tags: ["Solidity", "Hardhat", "Next.js", "Wagmi", "Base"],
-        github: "https://github.com/TradersEntertainment/basebuilding",
-    },
-    {
-        title: "Base Roulette Casino",
-        description: "Token-based roulette on Base: swap ETH for game tokens, bet black or red at 1.98x, and track platform-wide statistics. Three contracts - a burnable ERC-20, the roulette game, and a fee collector running automated buybacks.",
-        tags: ["Solidity", "ERC-20", "Next.js", "RainbowKit", "Base"],
-        github: "https://github.com/TradersEntertainment/TradersEntertainment.github.io",
-    },
-    {
         title: "Trader Battle",
         description: "Gamified investment simulator where you compete against legendary traders like Warren Buffett in historical market scenarios. Features AI portraits and real-time PnL tracking.",
         tags: ["Next.js", "Gamification", "TypeScript", "Tailwind"],
@@ -200,18 +136,6 @@ const otherProjects: Project[] = [
         description: "Autonomous X/Twitter account that scrapes Pump.fun GO bounties with Playwright, scores them for viral potential, writes tweets in degen-culture voice through an LLM and posts them on a cron, with a content safety filter in front of the API.",
         tags: ["Node.js", "Playwright", "LLM", "X API", "SQLite"],
         github: "https://github.com/TradersEntertainment/bounty",
-    },
-    {
-        title: "ButceSef",
-        description: "Kitchen assistant that scrapes daily grocery prices with Selenium and turns them into meal plans you can actually afford, so the menu follows the market rather than a fixed recipe list.",
-        tags: ["Python", "Selenium", "Scraping", "JavaScript"],
-        github: "https://github.com/TradersEntertainment/butcesef",
-    },
-    {
-        title: "Museum Heist",
-        description: "Real-time multiplayer heist game over Socket.IO, paired with an admin panel for a student art exhibition - JWT auth, upload handling, rate limiting and geo-tagged visitor stats.",
-        tags: ["JavaScript", "Socket.IO", "Express", "JWT"],
-        github: "https://github.com/TradersEntertainment/artstealgame",
     },
 ];
 
